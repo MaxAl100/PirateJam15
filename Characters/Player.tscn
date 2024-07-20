@@ -21,7 +21,6 @@ func _process(delta):
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1r674")
-Speed = 100.0
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5j5kc")

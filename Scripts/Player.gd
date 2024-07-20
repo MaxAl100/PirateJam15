@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-@export var Speed = 50.0
+@export var Speed = 80.0
 
 
 @export var Health = 100.0
-@export var MaxInvincibilityTime = 250
-var CurrentInvincibilityTime
+@export var MaxInvincibilityTime = 0.4
+var CurrentInvincibilityTime = 0
 
 
 func _physics_process(delta):
@@ -21,12 +21,18 @@ func _physics_process(delta):
 		velocity.x += Speed
 	
 	move_and_slide()
+	
+	CurrentInvincibilityTime -= delta
+	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var name = collision.get_collider().name
 		#print("I collided with ", name)
 		if "Enemy" in name:
-			_recieve_damage()
+			_recieve_damage(collision)
 
-func _recieve_damage():
-	print("I recieved damage!")
+func _recieve_damage(collision):
+	var damage = collision.get_collider().Damage
+	if CurrentInvincibilityTime <= 0:
+		CurrentInvincibilityTime = MaxInvincibilityTime
+		Health -= damage
