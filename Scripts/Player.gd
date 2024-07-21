@@ -26,9 +26,9 @@ func _physics_process(delta):
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		var name = collision.get_collider().name
+		var collision_name = collision.get_collider().name
 		#print("I collided with ", name)
-		if "Enemy" in name:
+		if "Enemy" in collision_name:
 			_recieve_damage(collision)
 
 func _recieve_damage(collision):

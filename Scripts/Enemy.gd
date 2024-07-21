@@ -7,7 +7,7 @@ var Player
 var Direction
 
 func _ready():
-	Player = get_parent().get_node("Player")
+	Player = get_parent().get_parent().get_node("Player")
 
 
 func _physics_process(delta):
