@@ -25,5 +25,4 @@ func _on_spawn_timeout():
 	var direction = Vector2(randf_range(-10, 10), randf_range(10, -10)).normalized()
 	var enemy_location = Player.position + DistanceFromPlayer * direction
 	enemy.position = enemy_location
-	get_parent().get_node("EnemyManager").add_child(enemy)  # Add the enemy to the EnemyManager node
-	print("Spawned enemy in position ", enemy.position,". The player is in ", Player.position)
+	get_parent().get_node("EnemyManager").add_child(enemy) 
