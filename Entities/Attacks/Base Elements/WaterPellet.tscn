@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://dy4bo2mtkjcnb"]
 
-[ext_resource type="Script" path="res://Scripts/Attacks/WaterPellet.gd" id="1_6hain"]
-[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_x16ky"]
+[ext_resource type="Script" path="res://Scripts/Attacks/Basic Elements/WaterPellet.gd" id="1_qdkvi"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_7e7dy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1vo54"]
 
 [node name="WaterPellet" type="Area2D"]
 scale = Vector2(0.4, 0.4)
-script = ExtResource("1_6hain")
+script = ExtResource("1_qdkvi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, -2)
 rotation = 1.5708
 scale = Vector2(0.167969, 0.251756)
-texture = ExtResource("2_x16ky")
+texture = ExtResource("2_7e7dy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, -2)

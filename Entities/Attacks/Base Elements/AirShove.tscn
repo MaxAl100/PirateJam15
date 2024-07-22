@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdusi82ut1bqd"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/Basic Elements/AirShove.gd" id="1_btine"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_c1cgo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8i7c"]
+size = Vector2(100, 200)
+
+[node name="AirShove" type="Area2D"]
+modulate = Color(1, 1, 1, 0.501961)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_btine")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(100, -0.684)
+rotation = -3.14254
+scale = Vector2(1.56403, 0.768319)
+texture = ExtResource("2_c1cgo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(100, -0.833348)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_g8i7c")

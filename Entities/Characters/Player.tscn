@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_1r674"]
 [ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_br3lb"]
-[ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/WaterPellet.tscn" id="2_v4kpu"]
+[ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_tpo63"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5j5kc"]
 
@@ -22,7 +22,7 @@ func _process(delta):
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1r674")
-Bullets = Array[PackedScene]([ExtResource("2_v4kpu")])
+Bullets = Array[PackedScene]([ExtResource("2_tpo63")])
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5j5kc")

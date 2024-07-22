@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=8 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
+[ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
 [ext_resource type="Script" path="res://Scripts/EnemyManager.gd" id="2_ewsba"]
 [ext_resource type="PackedScene" uid="uid://bctac63hk4goe" path="res://Entities/Characters/Enemy.tscn" id="2_ocplb"]
+[ext_resource type="PackedScene" uid="uid://bvaqgu1sot0x4" path="res://Entities/Attacks/Base Elements/FireCircle.tscn" id="3_7vh52"]
+[ext_resource type="PackedScene" uid="uid://cu7uf04pocvmc" path="res://Entities/Attacks/Base Elements/EarthShatter.tscn" id="4_08d6u"]
+[ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
 
 [node name="BaseLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_2w1nt")]
+top_level = true
+Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt")])
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu7uf04pocvmc"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/Basic Elements/EarthShatter.gd" id="1_qeeev"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_og8ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8i7c"]
+size = Vector2(51.6662, 225)
+
+[node name="EarthShatter" type="Area2D"]
+modulate = Color(1, 1, 1, 0.501961)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_qeeev")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(87.4566, -0.0828498)
+rotation = -3.14254
+scale = Vector2(1.77578, 0.409272)
+texture = ExtResource("2_og8ls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(87.4999, -0.833169)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_g8i7c")
