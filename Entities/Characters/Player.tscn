@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1ip6wdalw3he"]
+[gd_scene load_steps=6 format=3 uid="uid://d1ip6wdalw3he"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_1r674"]
 [ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_br3lb"]
+[ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/WaterPellet.tscn" id="2_v4kpu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5j5kc"]
 
@@ -21,6 +22,7 @@ func _process(delta):
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1r674")
+Bullets = Array[PackedScene]([ExtResource("2_v4kpu")])
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5j5kc")
@@ -29,3 +31,5 @@ script = SubResource("GDScript_sme75")
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_br3lb")
+
+[node name="Bullet Origin" type="Marker2D" parent="."]
