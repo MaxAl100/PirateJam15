@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
-@export var Damage = 10
-@export var Speed = 50.0
-@export var Health = 8.0
+@export var damage = 10
+@export var Speed = 15.0
+@export var Health = 2000.0
+@export var InvincibilityTime = 0.5
+@export var KnockbackResistance = 0.4
 
+var currInvincibility = 0
 var Player
 var Direction
 
@@ -13,11 +16,27 @@ func _ready():
 
 
 func _physics_process(delta):
-	Direction = (Player.position - self.position).normalized()
-	velocity = Direction * Speed
-	move_and_slide()
+	currInvincibility -= delta
+	if Health > 0:
+		Direction = (Player.position - self.position).normalized()
+		velocity = Direction * Speed
+		move_and_slide()
 
-func _recieve_damage(damage):
+func _recieve_damage(entity):
+	var damage = entity.damage
+	if currInvincibility > 0:
+		return
+	currInvincibility = InvincibilityTime
 	Health -= damage
 	if Health <= 0:
 		self.queue_free()
+	else:
+		_apply_knockback(entity)
+		
+func get_damage():
+	return damage
+
+
+func _apply_knockback(entity):
+	var knockback_direction = (position - entity.position).normalized()
+	position -= knockback_direction * entity.knockback * KnockbackResistance
