@@ -2,8 +2,11 @@ extends CharacterBody2D
 
 @export var Speed = 40.0
 @export var Bullets: Array[PackedScene] = []
-var timesForBullets: Array[float] = []
-@export var Health = 200.0
+var TimesForBullets: Array[float] = []
+
+@export var Health = 300.0
+@export var DecreaseStrength = 1.0
+@export var Light: PointLight2D
 
 @export var MaxInvincibilityTime = 0.8
 var CurrentInvincibilityTime = 0
@@ -14,12 +17,17 @@ var damage = 0
 var _last_direction = Vector2.RIGHT
 
 func _ready():
-	timesForBullets.resize(Bullets.size())
+	TimesForBullets.resize(Bullets.size())
 	for i in range(Bullets.size()):
 		var bullet_instance = Bullets[i].instantiate()
-		timesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
+		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
 
 func _physics_process(delta):
+	Health -= delta * DecreaseStrength
+	if fmod(Health, 10.0) == 0:
+		print(Health)
+	Light.scale = Vector2(Health/100, Health/100)
+	
 	velocity = Vector2.ZERO
 
 	if Input.is_action_pressed("move_down"):
@@ -43,12 +51,12 @@ func _physics_process(delta):
 		if "Enemy" in collision_name:
 			_recieve_damage(collision)
 
-	for i in range(timesForBullets.size()):
-		timesForBullets[i] -= delta
-		if timesForBullets[i] <= 0:
+	for i in range(TimesForBullets.size()):
+		TimesForBullets[i] -= delta
+		if TimesForBullets[i] <= 0:
 			_shoot_bullet(Bullets[i])
 			var bullet_instance = Bullets[i].instantiate()
-			timesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
+			TimesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
 
 func _recieve_damage(collision):
 	if CurrentInvincibilityTime > 0:
