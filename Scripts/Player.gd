@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var Bullets: Array[PackedScene] = []
 var timesForBullets: Array[float] = []
 @export var Health = 200.0
+
 @export var MaxInvincibilityTime = 0.8
 var CurrentInvincibilityTime = 0
 var damage = 0
