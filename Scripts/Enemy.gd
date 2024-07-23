@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 @export var damage = 10
 @export var Speed = 15.0
-@export var Health = 2000.0
+@export var Health = 3.0
+
 @export var InvincibilityTime = 0.5
 @export var KnockbackResistance = 0.4
 
