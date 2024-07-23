@@ -11,18 +11,19 @@
 
 [node name="BaseLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_2w1nt")]
+[node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
 top_level = true
 Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt")])
+Light = NodePath("PointLight2D")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 blend_mode = 2
+range_item_cull_mask = 7
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("6_atsj0")
-texture_scale = 3.0
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("2_ewsba")
