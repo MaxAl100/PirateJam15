@@ -8,7 +8,7 @@ var EnemySpawnTimer
 var Player
 
 func _ready():
-	EnemySpawnTimer = $Timer
+	EnemySpawnTimer = $NormalEnemyTimer
 	EnemySpawnTimer.wait_time = TimeBetweenSpawns
 	EnemySpawnTimer.timeout.connect(_on_spawn_timeout)
 	EnemySpawnTimer.start(TimeBetweenSpawns)

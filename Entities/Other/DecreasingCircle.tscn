@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://kjlf1qd1agvw"]
+
+[ext_resource type="Script" path="res://Scripts/Others/DecreasingCircle.gd" id="1_dtt8p"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_0ev0r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hrrb5"]
+radius = 217.0
+height = 580.0
+
+[node name="DecreasingCircle" type="Area2D"]
+script = ExtResource("1_dtt8p")
+
+[node name="DecreasingCollider" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hrrb5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6.5, 0.999985)
+scale = Vector2(2.50781, 3.39063)
+texture = ExtResource("2_0ev0r")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-1.5, 0.500004)
+scale = Vector2(4.25781, 1.89844)
+texture = ExtResource("2_0ev0r")
