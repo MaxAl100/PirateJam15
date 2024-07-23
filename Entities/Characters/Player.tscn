@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1ip6wdalw3he"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_1r674"]
+[ext_resource type="Script" path="res://Scripts/Entities/Player.gd" id="1_1r674"]
 [ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_br3lb"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_tpo63"]
 
