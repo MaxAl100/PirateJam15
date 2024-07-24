@@ -131,9 +131,7 @@ func remove_bullet(pos):
 		else:
 			CurrentSpell -= 1
 	
-	print(Health)
 	Health += Bullets[pos].instantiate().burn_value
-	print(Health)
 	Bullets.remove_at(pos)
 	
 	resize_lists()
