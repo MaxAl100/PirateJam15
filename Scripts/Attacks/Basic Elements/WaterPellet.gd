@@ -12,7 +12,6 @@ var direction = Vector2.ZERO
 func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))
 
-
 func _physics_process(delta):
 	position += direction * speed * delta
 

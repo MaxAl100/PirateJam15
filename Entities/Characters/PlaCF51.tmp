@@ -43,5 +43,4 @@ offset_top = -84.0
 offset_right = 87.0
 offset_bottom = -25.0
 placeholder_text = "No element selected"
-editable = false
 wrap_mode = 1
