@@ -1,13 +1,13 @@
 extends Area2D
 
 var damage = 8
-var knockback = 60
 var amount = 1
 var maxTimeBetweenAttacks = 28
 var currentTimeBetweenAttacks = 1
 var attackLength = 0.12
 var target = "nearest enemy"
 var direction = Vector2.ZERO
+var knockback = 60
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))
