@@ -4,6 +4,10 @@ extends CharacterBody2D
 @export var Bullets: Array[PackedScene] = []
 var TimesForBullets: Array[float] = []
 
+var CurrentSpell = 0
+var AllSpellInfo: Array[String] = []
+var SpellText
+
 @export var Health = 300.0
 @export var DecreaseStrength = 1.0
 @export var Light: PointLight2D
@@ -18,9 +22,14 @@ var _last_direction = Vector2.RIGHT
 
 func _ready():
 	TimesForBullets.resize(Bullets.size())
+	AllSpellInfo.resize(Bullets.size())
 	for i in range(Bullets.size()):
 		var bullet_instance = Bullets[i].instantiate()
 		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
+		AllSpellInfo[i] = bullet_instance.name
+		print(AllSpellInfo[i])
+	SpellText = $"Symbol Holder/Current Spell Info"
+	SpellText.text = AllSpellInfo[CurrentSpell]
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
@@ -42,6 +51,11 @@ func _physics_process(delta):
 		_last_direction = Vector2.RIGHT
 
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("next_rune"):
+		change_selected(true)
+	elif Input.is_action_just_pressed("prev_rune"):
+		change_selected(false)
 
 	CurrentInvincibilityTime -= delta
 
@@ -103,3 +117,18 @@ func _shoot_bullet(bullet_scene):
 		newBullet.set_direction_and_rotate(_last_direction)
 		newBullet.position = $"Bullet Origin".position
 		add_child(newBullet)
+
+func remove_bullet(pos):
+	pass
+
+func add_bullet(bullet):
+	pass
+
+func change_selected(next):
+	if next:
+		CurrentSpell = (CurrentSpell + 1)%Bullets.size()
+	else:
+		CurrentSpell = (CurrentSpell - 1)
+		if CurrentSpell < 0:
+			CurrentSpell = Bullets.size() - 1
+	SpellText.text = AllSpellInfo[CurrentSpell]
