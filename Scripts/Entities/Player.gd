@@ -7,6 +7,8 @@ var TimesForBullets: Array[float] = []
 var CurrentSpell = 0
 var AllSpellInfo: Array[String] = []
 var SpellText
+@export var TotalTimeToBurn = 3
+var currentTimeToBurn = 3
 
 @export var Health = 300.0
 @export var DecreaseStrength = 1.0
@@ -21,20 +23,12 @@ var damage = 0
 var _last_direction = Vector2.RIGHT
 
 func _ready():
-	TimesForBullets.resize(Bullets.size())
-	AllSpellInfo.resize(Bullets.size())
-	for i in range(Bullets.size()):
-		var bullet_instance = Bullets[i].instantiate()
-		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
-		AllSpellInfo[i] = bullet_instance.name
-		print(AllSpellInfo[i])
+	resize_lists()
 	SpellText = $"Symbol Holder/Current Spell Info"
 	SpellText.text = AllSpellInfo[CurrentSpell]
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
-	if fmod(Health, 10.0) == 0:
-		print(Health)
 	Light.scale = Vector2(Health/100, Health/100)
 	
 	velocity = Vector2.ZERO
@@ -56,6 +50,15 @@ func _physics_process(delta):
 		change_selected(true)
 	elif Input.is_action_just_pressed("prev_rune"):
 		change_selected(false)
+	
+	if Input.is_action_pressed("burn_rune"):
+		currentTimeToBurn -= delta
+		if currentTimeToBurn < 0:
+			remove_bullet(CurrentSpell)
+			currentTimeToBurn = TotalTimeToBurn
+	if Input.is_action_just_released("burn_rune"):
+		currentTimeToBurn = TotalTimeToBurn
+		
 
 	CurrentInvincibilityTime -= delta
 
@@ -119,16 +122,46 @@ func _shoot_bullet(bullet_scene):
 		add_child(newBullet)
 
 func remove_bullet(pos):
-	pass
+	if Bullets.size() <= 1:
+		return
+	
+	if pos <= CurrentSpell:
+		if CurrentSpell == 0:
+			CurrentSpell = 0  
+		else:
+			CurrentSpell -= 1
+	
+	print(Health)
+	Health += Bullets[pos].instantiate().burn_value
+	print(Health)
+	Bullets.remove_at(pos)
+	
+	resize_lists()
+	
+	if Bullets.size() > 0:
+		SpellText.text = AllSpellInfo[CurrentSpell]
+	else:
+		SpellText.text = "No Spells Available"
 
 func add_bullet(bullet):
-	pass
+	Bullets.append(bullet)
+	resize_lists()
+
+func resize_lists():
+	TimesForBullets.resize(Bullets.size())
+	AllSpellInfo.resize(Bullets.size())
+	for i in range(Bullets.size()):
+		var bullet_instance = Bullets[i].instantiate()
+		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
+		AllSpellInfo[i] = bullet_instance.name
 
 func change_selected(next):
 	if next:
-		CurrentSpell = (CurrentSpell + 1)%Bullets.size()
+		CurrentSpell = (CurrentSpell + 1) % Bullets.size()
 	else:
-		CurrentSpell = (CurrentSpell - 1)
+		CurrentSpell = (CurrentSpell - 1) % Bullets.size()
 		if CurrentSpell < 0:
 			CurrentSpell = Bullets.size() - 1
-	SpellText.text = AllSpellInfo[CurrentSpell]
+	
+	if Bullets.size() > 0:
+		SpellText.text = AllSpellInfo[CurrentSpell]
