@@ -8,7 +8,7 @@ var DamageMultiplier = 1
 
 @export var InvincibilityTime = 0.5
 @export var KnockbackResistance = 0.4
-var Invincibilities: Array[PackedScene] = []
+var Invincibilities: Array[Area2D] = []
 var currInvincibility: Array[float] = []
 
 var Player
@@ -38,7 +38,7 @@ func _recieve_damage(entity):
 	if entity in Invincibilities:
 		return
 	var rec_damage = entity.damage
-	InvincibilityTime.append(entity)
+	Invincibilities.append(entity)
 	currInvincibility.append(InvincibilityTime)
 	Health -= rec_damage * DamageMultiplier
 	if Health <= 0:
