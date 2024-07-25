@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var Speed = 40.0
 @export var Bullets: Array[PackedScene] = []
 var TimesForBullets: Array[float] = []
+var BulletContainer
 
 var CurrentSpell = 0
 var AllSpellInfo: Array[String] = []
@@ -26,6 +27,8 @@ func _ready():
 	resize_lists()
 	SpellText = $"Symbol Holder/Current Spell Info"
 	SpellText.text = AllSpellInfo[CurrentSpell]
+	print(get_tree().root.get_node("BaseLevel/BulletContainer"))
+	BulletContainer = get_tree().root.get_node("BaseLevel/BulletContainer")
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
@@ -108,9 +111,10 @@ func _shoot_bullet(bullet_scene):
 			if position.distance_to(enemy.position) < position.distance_to(closest_enemy.position):
 				closest_enemy = enemy
 		var direction = (closest_enemy.position - position).normalized()
-		newBullet.position = $"Bullet Origin".position
 		newBullet.set_direction_and_rotate(direction)
-		add_child(newBullet)
+		BulletContainer.add_child(newBullet)
+		newBullet.position = self.position
+
 	
 	elif newBullet.target == "self":
 		newBullet.position = $"Bullet Origin".position
