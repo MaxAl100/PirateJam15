@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var Bullets: Array[PackedScene] = []
 var TimesForBullets: Array[float] = []
 var BulletContainer
+var TurningCounter = {}
 
 var CurrentSpell = 0
 var AllSpellInfo: Array[String] = []
@@ -74,7 +75,7 @@ func _physics_process(delta):
 	for i in range(TimesForBullets.size()):
 		TimesForBullets[i] -= delta
 		if TimesForBullets[i] <= 0:
-			_shoot_bullet(Bullets[i])
+			_shoot_bullet(Bullets[i], i)
 			var bullet_instance = Bullets[i].instantiate()
 			TimesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
 
@@ -101,7 +102,7 @@ func _apply_knockback(collision):
 	var knockback_direction = (position - collider.position).normalized()
 	velocity += knockback_direction * KnockbackStrength
 
-func _shoot_bullet(bullet_scene):
+func _shoot_bullet(bullet_scene, pos):
 	var newBullet = bullet_scene.instantiate()
 	var all_enemies = get_tree().get_nodes_in_group("enemies")
 
@@ -124,6 +125,13 @@ func _shoot_bullet(bullet_scene):
 		newBullet.set_direction_and_rotate(_last_direction)
 		newBullet.position = $"Bullet Origin".position
 		add_child(newBullet)
+	
+	elif newBullet.target == "turning":
+		var direction = Vector2(0,1).rotated(deg_to_rad(45*TurningCounter[pos]))
+		TurningCounter[pos] = (TurningCounter[pos] + 1)%8
+		newBullet.set_direction_and_rotate(direction)
+		BulletContainer.add_child(newBullet)
+		newBullet.position = self.position
 
 func remove_bullet(pos):
 	if Bullets.size() <= 1:
@@ -150,12 +158,19 @@ func add_bullet(bullet):
 	resize_lists()
 
 func resize_lists():
+	var oldCounter = TurningCounter
+	TurningCounter.clear()
 	TimesForBullets.resize(Bullets.size())
 	AllSpellInfo.resize(Bullets.size())
 	for i in range(Bullets.size()):
 		var bullet_instance = Bullets[i].instantiate()
 		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
 		AllSpellInfo[i] = bullet_instance.name
+		if bullet_instance.target == "turning":
+			if oldCounter.has(i):
+				TurningCounter[i] = oldCounter[i]
+			else:
+				TurningCounter[i] = 0
 
 func change_selected(next):
 	if next:

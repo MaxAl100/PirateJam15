@@ -15,7 +15,7 @@ func _ready():
 	Player = get_parent().get_node("Player")
 
 
-func _process(delta):
+func _process(_delta):
 	pass
 	
 	

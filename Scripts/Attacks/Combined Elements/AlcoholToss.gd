@@ -6,7 +6,7 @@ var active = false
 
 var damage = 2
 var amount = 1
-var maxTimeBetweenAttacks = 21
+var maxTimeBetweenAttacks = 13
 var currentTimeBetweenAttacks = 1
 var attackLength = 99
 var target = "nearest enemy"
