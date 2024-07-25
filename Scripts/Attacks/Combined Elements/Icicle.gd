@@ -1,15 +1,15 @@
 extends Area2D
 
-var speed = 400
+var speed = 180
 
-var damage = 14
+var damage = 22
 var amount = 1
-var maxTimeBetweenAttacks = 10
+var maxTimeBetweenAttacks = 18
 var currentTimeBetweenAttacks = 1
-var attackLength = 99
+var attackLength = 4
 var target = "nearest enemy"
 var direction = Vector2.ZERO
-var knockback = -25
+var knockback = -20
 
 var burn_value = 10
 
@@ -18,13 +18,14 @@ func _ready():
 
 func _physics_process(delta):
 	position += direction * speed * delta
+	attackLength -= delta
 
 func _on_Bullet_body_entered(body):
-	if body.name == "Player":
-		return
 	if body.is_in_group("enemies"):
 		body._recieve_damage(self)
-	queue_free()
+		body.SlowDownEffect = 0.2
+	if attackLength <= 0:
+		queue_free()
 
 func set_direction_and_rotate(direction):
 	self.direction = direction

@@ -7,7 +7,7 @@ var currentTimeBetweenAttacks = 1
 var attackLength = 0.12
 var target = "nearest enemy"
 var direction = Vector2.ZERO
-var knockback = 60
+var knockback = -60
 
 var burn_value = 10
 
