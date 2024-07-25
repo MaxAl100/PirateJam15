@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dexbntrl5ek7u"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/Combined Elements/DustDevil.gd" id="1_px6pi"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_ipuju"]
+
+[node name="DustDevil" type="Area2D"]
+modulate = Color(1, 1, 1, 0.501961)
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_px6pi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(220.384, 0)
+rotation = -3.14254
+scale = Vector2(0.433065, 1.28676)
+texture = ExtResource("2_ipuju")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(133.581, 0.918444)
+rotation = -3.14254
+scale = Vector2(3.20728, 0.509905)
+texture = ExtResource("2_ipuju")
+
+[node name="TriangleSide" type="CollisionPolygon2D" parent="."]
+position = Vector2(100, -0.833348)
+rotation = 1.5708
+polygon = PackedVector2Array(-20, 100, -100, -150, 100, -150, 20, 100)

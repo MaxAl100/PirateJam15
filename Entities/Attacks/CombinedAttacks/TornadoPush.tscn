@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0jv3ulohb1f8"]
 
-[ext_resource type="Script" path="res://Entities/Attacks/CombinedAttacks/TornadoPush.gd" id="1_ltyvl"]
+[ext_resource type="Script" path="res://Scripts/Attacks/Combined Elements/TornadoPush.gd" id="1_ltyvl"]
 [ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_18jkc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8nm75"]
