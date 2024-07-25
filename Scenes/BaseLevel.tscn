@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=12 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://0jv3ulohb1f8" path="res://Entities/Attacks/CombinedAttacks/TornadoPush.tscn" id="6_ap5v1"]
 [ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
 [ext_resource type="PackedScene" uid="uid://dexbntrl5ek7u" path="res://Entities/Attacks/CombinedAttacks/DustDevil.tscn" id="7_ms1b2"]
+[ext_resource type="PackedScene" uid="uid://cpl1echkfrtjl" path="res://Entities/Attacks/CombinedAttacks/SteamScreen.tscn" id="8_320i4"]
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -17,7 +18,7 @@
 
 [node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
 top_level = true
-Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt"), ExtResource("6_ap5v1"), ExtResource("7_ms1b2")])
+Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt"), ExtResource("6_ap5v1"), ExtResource("7_ms1b2"), ExtResource("8_320i4")])
 Light = NodePath("PointLight2D")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]

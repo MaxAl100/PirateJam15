@@ -2,11 +2,11 @@ extends Area2D
 
 var damage = 3
 var amount = 1
-var maxTimeBetweenAttacks = 12
-var currentTimeBetweenAttacks = 1
-var attackLength = 5
+var maxTimeBetweenAttacks = 18
+var currentTimeBetweenAttacks = 2
+var attackLength = 2
 var target = "self"
-var knockback = 10
+var knockback = 80
 
 var burn_value = 10
 
