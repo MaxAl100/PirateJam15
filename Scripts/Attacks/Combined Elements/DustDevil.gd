@@ -2,7 +2,7 @@ extends Area2D
 
 var damage = 2
 var amount = 1
-var maxTimeBetweenAttacks = 1.5
+var maxTimeBetweenAttacks = 4
 var currentTimeBetweenAttacks = 1
 var attackLength = 0.03
 var target = "looking side"
