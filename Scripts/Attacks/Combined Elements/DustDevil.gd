@@ -25,6 +25,6 @@ func _on_Bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		body._recieve_damage(self)
 
-func set_direction_and_rotate(direction):
-	self.direction = direction
-	rotation = direction.angle()
+func set_direction_and_rotate(dir):
+	self.direction = dir
+	rotation = dir.angle()
