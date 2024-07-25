@@ -3,12 +3,14 @@ extends CharacterBody2D
 @export var damage = 10
 @export var Speed = 15.0
 var SlowDownEffect = 1
+var DamageMultiplier = 1
 @export var Health = 3.0
 
 @export var InvincibilityTime = 0.5
 @export var KnockbackResistance = 0.4
+var Invincibilities: Array[PackedScene] = []
+var currInvincibility: Array[float] = []
 
-var currInvincibility = 0
 var Player
 var Direction
 
@@ -18,8 +20,11 @@ func _ready():
 
 
 func _physics_process(delta):
-	if currInvincibility > 0:
-		currInvincibility -= delta
+	for pos in currInvincibility.size():
+		currInvincibility[pos] -= delta
+		if currInvincibility[pos] <= 0:
+			currInvincibility.remove_at(pos)
+			Invincibilities.remove_at(pos)
 	if SlowDownEffect > 1:
 		SlowDownEffect = 1
 	elif SlowDownEffect < 1:
@@ -30,11 +35,12 @@ func _physics_process(delta):
 		move_and_slide()
 
 func _recieve_damage(entity):
-	var damage = entity.damage
-	if currInvincibility > 0:
+	if entity in Invincibilities:
 		return
-	currInvincibility = InvincibilityTime
-	Health -= damage
+	var rec_damage = entity.damage
+	InvincibilityTime.append(entity)
+	currInvincibility.append(InvincibilityTime)
+	Health -= rec_damage * DamageMultiplier
 	if Health <= 0:
 		self.queue_free()
 	else:

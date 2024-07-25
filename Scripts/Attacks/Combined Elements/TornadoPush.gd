@@ -41,6 +41,6 @@ func _on_Bullet_body_exited(body):
 	if body.is_in_group("enemies"):
 		body.set_meta("being_pulled", false) 
  
-func set_direction_and_rotate(direction):
-	self.direction = direction
-	rotation = direction.angle()
+func set_direction_and_rotate(dir):
+	self.direction = dir
+	rotation = dir.angle()
