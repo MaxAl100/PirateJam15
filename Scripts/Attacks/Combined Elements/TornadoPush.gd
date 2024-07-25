@@ -4,7 +4,7 @@ var speed = 50
 var pull_strength = 100
 var rotation_speed = 1000
 
-var damage = 0.010
+var damage = 10
 var amount = 1
 var maxTimeBetweenAttacks = 15
 var currentTimeBetweenAttacks = 1

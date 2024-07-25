@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var damage = 10
 @export var Speed = 15.0
+var SlowDownEffect = 1
 @export var Health = 3.0
 
 @export var InvincibilityTime = 0.5
@@ -17,10 +18,15 @@ func _ready():
 
 
 func _physics_process(delta):
-	currInvincibility -= delta
+	if currInvincibility > 0:
+		currInvincibility -= delta
+	if SlowDownEffect > 1:
+		SlowDownEffect = 1
+	elif SlowDownEffect < 1:
+		SlowDownEffect += 0.5 * delta
 	if Health > 0:
 		Direction = (Player.position - self.position).normalized()
-		velocity = Direction * Speed
+		velocity = Direction * Speed * SlowDownEffect
 		move_and_slide()
 
 func _recieve_damage(entity):

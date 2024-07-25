@@ -7,7 +7,7 @@ var currentTimeBetweenAttacks = 1
 var attackLength = 0.03
 var target = "looking side"
 var direction = Vector2.ZERO
-var knockback = 120
+var knockback = -120
 
 var burn_value = 10
 
