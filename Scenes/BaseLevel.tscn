@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=16 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cou8ksnavvdvv" path="res://Entities/Attacks/CombinedAttacks/Icicle.tscn" id="9_1lg1d"]
 [ext_resource type="PackedScene" uid="uid://ddck0wve0m23b" path="res://Entities/Attacks/CombinedAttacks/IronSword.tscn" id="10_guqoq"]
 [ext_resource type="PackedScene" uid="uid://kendl01lri3t" path="res://Entities/Attacks/CombinedAttacks/LavaBall.tscn" id="11_kgfdi"]
+[ext_resource type="PackedScene" uid="uid://d25eqfwr5fh1i" path="res://Entities/Attacks/CombinedAttacks/MudBlob.tscn" id="12_6jqr0"]
 
 [node name="BaseLevel" type="Node2D"]
 
@@ -21,7 +22,7 @@
 
 [node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
 top_level = true
-Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt"), ExtResource("6_ap5v1"), ExtResource("7_ms1b2"), ExtResource("8_320i4"), ExtResource("9_1lg1d"), ExtResource("10_guqoq"), ExtResource("11_kgfdi")])
+Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt"), ExtResource("6_ap5v1"), ExtResource("7_ms1b2"), ExtResource("8_320i4"), ExtResource("9_1lg1d"), ExtResource("10_guqoq"), ExtResource("11_kgfdi"), ExtResource("12_6jqr0")])
 Light = NodePath("PointLight2D")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
