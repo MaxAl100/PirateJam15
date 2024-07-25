@@ -32,12 +32,17 @@ func _recieve_damage(entity):
 	if Health <= 0:
 		self.queue_free()
 	else:
-		_apply_knockback(entity)
+		apply_knockback(entity)
 		
 func get_damage():
 	return damage
 
 
-func _apply_knockback(entity):
+func apply_knockback(entity):
 	var knockback_direction = (position - entity.position).normalized()
 	position -= knockback_direction * entity.knockback * KnockbackResistance
+
+func apply_pull_force(source_position, strength, delta):
+	var pull_direction = (source_position - position).normalized()
+	position += pull_direction * strength * delta
+
