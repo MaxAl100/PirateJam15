@@ -4,9 +4,9 @@ var damage = 3
 var amount = 1
 var maxTimeBetweenAttacks = 18
 var currentTimeBetweenAttacks = 2
-var attackLength = 2
+var attackLength = 0.5
 var target = "self"
-var knockback = -80
+var knockback = -160
 
 var burn_value = 10
 
