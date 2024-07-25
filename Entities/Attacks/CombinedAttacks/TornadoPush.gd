@@ -6,7 +6,7 @@ var rotation_speed = 1000
 
 var damage = 0.010
 var amount = 1
-var maxTimeBetweenAttacks = 1
+var maxTimeBetweenAttacks = 15
 var currentTimeBetweenAttacks = 1
 var attackLength = 5
 var target = "nearest enemy"
