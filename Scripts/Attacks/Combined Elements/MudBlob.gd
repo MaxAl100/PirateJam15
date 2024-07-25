@@ -37,6 +37,6 @@ func set_direction_and_rotate(direction):
 
 func activate():
 	active = true
-	self.attackLength = 10
+	self.attackLength = 0.2
 	self.direction = Vector2(0,0)
 	AnimPlayer.play("LavaExplosion",-1,1.0,false)
