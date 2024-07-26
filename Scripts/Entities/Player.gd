@@ -131,7 +131,7 @@ func _shoot_bullet(bullet_scene, pos):
 		TurningCounter[pos] = (TurningCounter[pos] + 1)%8
 		newBullet.set_direction_and_rotate(direction)
 		BulletContainer.add_child(newBullet)
-		newBullet.position = self.position
+		newBullet.position = position
 
 func remove_bullet(pos):
 	if Bullets.size() <= 1:
