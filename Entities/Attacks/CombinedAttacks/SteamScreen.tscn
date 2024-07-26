@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpl1echkfrtjl"]
 
-[ext_resource type="Script" path="res://Scripts/Attacks/Combined Elements/MoonPower.gd" id="1_6hamb"]
+[ext_resource type="Script" path="res://Scripts/Attacks/Combined Elements/SteamScreen.gd" id="1_4tkox"]
 [ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_iok4j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1h07"]
-size = Vector2(52, 26)
+size = Vector2(50, 50)
 
 [sub_resource type="Animation" id="Animation_ftkwb"]
 length = 0.001
@@ -43,19 +43,18 @@ _data = {
 "Steam Screen Animation": SubResource("Animation_bhtgo")
 }
 
-[node name="MoonPower" type="Area2D"]
+[node name="SteamScreen" type="Area2D"]
 modulate = Color(1, 1, 1, 0.501961)
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_6hamb")
+script = ExtResource("1_4tkox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(13, 0)
-rotation = -3.14254
-scale = Vector2(0.2, 0.4)
+rotation = -3.14159
+scale = Vector2(0.389038, 0.4)
 texture = ExtResource("2_iok4j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12.9999, 1.04904e-05)
+position = Vector2(0.999953, -3.29493e-05)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_w1h07")
 
