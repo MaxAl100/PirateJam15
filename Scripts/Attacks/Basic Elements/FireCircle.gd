@@ -14,6 +14,7 @@ func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))
 
 
+
 func _physics_process(delta):
 	attackLength -= delta
 	if attackLength <= 0:
@@ -22,3 +23,4 @@ func _physics_process(delta):
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		body._recieve_damage(self)
+

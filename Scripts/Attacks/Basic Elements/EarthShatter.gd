@@ -13,7 +13,7 @@ var burn_value = 10
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))
-
+	
 
 func _physics_process(delta):
 	attackLength -= delta

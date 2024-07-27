@@ -2,6 +2,25 @@ extends CharacterBody2D
 
 @export var Speed = 40.0
 @export var Bullets: Array[PackedScene] = []
+@export var CombinableBullets: Array[PackedScene] = []
+
+@export var AirScene: PackedScene
+@export var EarthScene: PackedScene
+@export var FireScene: PackedScene
+@export var WaterScene: PackedScene
+@export var TornadoScene: PackedScene
+@export var DustScene: PackedScene
+@export var SteamScene: PackedScene
+@export var IceScene: PackedScene
+@export var IronScene: PackedScene
+@export var LavaScene: PackedScene
+@export var MudScene: PackedScene
+@export var SunScene: PackedScene
+@export var AlcoholScene: PackedScene
+@export var MoonScene: PackedScene
+
+var combination_dict: Dictionary = {}
+
 var TimesForBullets: Array[float] = []
 var BulletContainer
 var TurningCounter = {}
@@ -25,11 +44,38 @@ var damage = 0
 var _last_direction = Vector2.RIGHT
 
 func _ready():
+	combination_dict = {
+		"AirShove": {
+			"AirShove": TornadoScene,
+			"EarthShatter": DustScene,
+			"FireCircle": SteamScene,
+			"WaterPellet": IceScene
+		},
+		"EarthShatter": {
+			"AirShove": DustScene,
+			"EarthShatter": IronScene,
+			"FireCircle": LavaScene,
+			"WaterPellet": MudScene
+		},
+		"FireCircle": {
+			"AirShove": SteamScene,
+			"EarthShatter": LavaScene,
+			"FireCircle": SunScene,
+			"WaterPellet": AlcoholScene
+		},
+		"WaterPellet": {
+			"AirShove": IceScene,
+			"EarthShatter": MudScene,
+			"FireCircle": AlcoholScene,
+			"WaterPellet": MoonScene
+		}
+	}
 	resize_lists()
 	SpellText = $"Symbol Holder/Current Spell Info"
 	SpellText.text = AllSpellInfo[CurrentSpell]
-	print(get_tree().root.get_node("BaseLevel/BulletContainer"))
 	BulletContainer = get_tree().root.get_node("BaseLevel/BulletContainer")
+	combine_spells(2,3)
+	combine_spells(0,1)
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
@@ -134,6 +180,7 @@ func _shoot_bullet(bullet_scene, pos):
 		newBullet.position = position
 
 func remove_bullet(pos):
+	print("Removing at location ", pos)
 	if Bullets.size() <= 1:
 		return
 	
@@ -182,3 +229,24 @@ func change_selected(next):
 	
 	if Bullets.size() > 0:
 		SpellText.text = AllSpellInfo[CurrentSpell]
+
+func combine_spells(pos1, pos2):
+	if pos1 == pos2 or pos1 > Bullets.size() or pos2 > Bullets.size():
+		return
+	var spell1 = Bullets[pos1]
+	var spell2 = Bullets[pos2]
+	if spell1 not in CombinableBullets or spell2 not in CombinableBullets:
+		return
+	var spell_instance1 = spell1.instantiate()
+	var spell_instance2 = spell2.instantiate()
+	var new_spell = combination_dict[spell_instance1.name][spell_instance2.name]
+	
+	if new_spell:
+		if pos1 > pos2:
+			remove_bullet(pos1)
+			remove_bullet(pos2)
+		else:
+			remove_bullet(pos2)
+			remove_bullet(pos1)
+		add_bullet(new_spell)
+	

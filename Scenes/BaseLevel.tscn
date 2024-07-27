@@ -25,7 +25,22 @@
 
 [node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
 top_level = true
-Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu"), ExtResource("14_2a7d2"), ExtResource("7_ms1b2"), ExtResource("9_1lg1d"), ExtResource("10_guqoq"), ExtResource("11_kgfdi"), ExtResource("15_qenvx"), ExtResource("12_6jqr0"), ExtResource("8_320i4"), ExtResource("13_k8q0o"), ExtResource("6_ap5v1")])
+Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu")])
+CombinableBullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu")])
+AirScene = ExtResource("5_0vqtt")
+EarthScene = ExtResource("4_08d6u")
+FireScene = ExtResource("3_7vh52")
+WaterScene = ExtResource("2_d6ayu")
+TornadoScene = ExtResource("6_ap5v1")
+DustScene = ExtResource("7_ms1b2")
+SteamScene = ExtResource("8_320i4")
+IceScene = ExtResource("9_1lg1d")
+IronScene = ExtResource("10_guqoq")
+LavaScene = ExtResource("11_kgfdi")
+MudScene = ExtResource("12_6jqr0")
+SunScene = ExtResource("13_k8q0o")
+AlcoholScene = ExtResource("14_2a7d2")
+MoonScene = ExtResource("15_qenvx")
 Light = NodePath("PointLight2D")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
