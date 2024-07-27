@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var Speed = 15.0
 var SlowDownEffect = 1
 var DamageMultiplier = 1
-@export var Health = 80.0
+@export var Health = 30.0
 
 @export var InvincibilityTime = 0.5
 @export var TotalInvincibilityTime = 0.1

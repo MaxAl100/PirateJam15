@@ -3,7 +3,8 @@ extends Area2D
 var damage = 2
 var amount = 1
 var maxTimeBetweenAttacks = 18
-var currentTimeBetweenAttacks = 1
+var startingTimeGenerator = RandomNumberGenerator.new()
+var currentTimeBetweenAttacks = startingTimeGenerator.randi_range(1,5)
 var attackLength = 0.06
 var target = "looking side"
 var direction = Vector2.ZERO
