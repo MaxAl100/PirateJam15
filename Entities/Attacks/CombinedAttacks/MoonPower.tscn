@@ -8,7 +8,6 @@ radius = 30.0
 
 [node name="MoonPower" type="Area2D"]
 modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(150, 0)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("1_g0q72")
 
