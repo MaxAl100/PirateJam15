@@ -20,6 +20,7 @@ extends CharacterBody2D
 @export var MoonScene: PackedScene
 
 var combination_dict: Dictionary = {}
+var selectedForCombination
 
 var TimesForBullets: Array[float] = []
 var BulletContainer
@@ -74,8 +75,28 @@ func _ready():
 	SpellText = $"Symbol Holder/Current Spell Info"
 	SpellText.text = AllSpellInfo[CurrentSpell]
 	BulletContainer = get_tree().root.get_node("BaseLevel/BulletContainer")
-	combine_spells(2,3)
-	combine_spells(0,1)
+
+func _process(delta):
+	if Input.is_action_just_pressed("next_rune"):
+		change_selected(true)
+	elif Input.is_action_just_pressed("prev_rune"):
+		change_selected(false)
+	
+	if Input.is_action_pressed("burn_rune"):
+		currentTimeToBurn -= delta
+		if currentTimeToBurn < 0:
+			remove_bullet(CurrentSpell)
+			currentTimeToBurn = TotalTimeToBurn
+	if Input.is_action_just_released("burn_rune"):
+		currentTimeToBurn = TotalTimeToBurn
+	
+	if Input.is_action_just_pressed("select"):
+		print("Selected the following element: ", CurrentSpell)
+		if selectedForCombination != null:
+			combine_spells(selectedForCombination, CurrentSpell)
+			selectedForCombination = null
+		else:
+			selectedForCombination = CurrentSpell
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
@@ -95,19 +116,7 @@ func _physics_process(delta):
 		_last_direction = Vector2.RIGHT
 
 	move_and_slide()
-	
-	if Input.is_action_just_pressed("next_rune"):
-		change_selected(true)
-	elif Input.is_action_just_pressed("prev_rune"):
-		change_selected(false)
-	
-	if Input.is_action_pressed("burn_rune"):
-		currentTimeToBurn -= delta
-		if currentTimeToBurn < 0:
-			remove_bullet(CurrentSpell)
-			currentTimeToBurn = TotalTimeToBurn
-	if Input.is_action_just_released("burn_rune"):
-		currentTimeToBurn = TotalTimeToBurn
+
 		
 
 	CurrentInvincibilityTime -= delta
@@ -232,10 +241,12 @@ func change_selected(next):
 
 func combine_spells(pos1, pos2):
 	if pos1 == pos2 or pos1 > Bullets.size() or pos2 > Bullets.size():
+		print("Error in recieving positions")
 		return
 	var spell1 = Bullets[pos1]
 	var spell2 = Bullets[pos2]
 	if spell1 not in CombinableBullets or spell2 not in CombinableBullets:
+		print("Error in recieving spells")
 		return
 	var spell_instance1 = spell1.instantiate()
 	var spell_instance2 = spell2.instantiate()

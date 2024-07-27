@@ -6,7 +6,7 @@ var maxTimeBetweenAttacks = 12
 var currentTimeBetweenAttacks = 1
 var attackLength = 5
 var target = "self"
-var knockback = -10
+var knockback = 0
 
 var burn_value = 10
 
