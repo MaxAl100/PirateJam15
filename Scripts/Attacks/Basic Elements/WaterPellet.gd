@@ -29,3 +29,4 @@ func _on_Bullet_body_entered(body):
 func set_direction_and_rotate(dir):
 	self.direction = dir
 	rotation = dir.angle()
+
