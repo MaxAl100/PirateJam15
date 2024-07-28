@@ -14,6 +14,8 @@ var damage = 0
 
 @export var KnockbackStrength = 20.0
 
+var PlayerSprite
+
 var _last_direction = Vector2.RIGHT
 
 func _ready():
@@ -21,6 +23,8 @@ func _ready():
 	for i in range(Bullets.size()):
 		var bullet_instance = Bullets[i].instantiate()
 		TimesForBullets[i] = bullet_instance.currentTimeBetweenAttacks
+	PlayerSprite = $PlayerSprite
+	PlayerSprite.play("walk_right")
 
 func _physics_process(delta):
 	Health -= delta * DecreaseStrength
@@ -37,9 +41,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= Speed
 		_last_direction = Vector2.LEFT
+		PlayerSprite.flip_h = true
 	if Input.is_action_pressed("move_right"):
 		velocity.x += Speed
 		_last_direction = Vector2.RIGHT
+		PlayerSprite.flip_h = false
 
 	move_and_slide()
 
