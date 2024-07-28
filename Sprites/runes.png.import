@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckxbmprora02o"
-
-path="res://.godot/imported/alchemy.png-bcb12a76d762796ed24de0beaddf98be.ctex"
+uid="uid://5l42f3vc4ha1"
+path="res://.godot/imported/runes.png-fabbf4ec8ea3bc1b0884d806d37a361f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/alchemy.png"
-dest_files=["res://.godot/imported/alchemy.png-bcb12a76d762796ed24de0beaddf98be.ctex"]
+source_file="res://Sprites/runes.png"
+dest_files=["res://.godot/imported/runes.png-fabbf4ec8ea3bc1b0884d806d37a361f.ctex"]
 
 [params]
 
