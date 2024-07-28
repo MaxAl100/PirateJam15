@@ -18,6 +18,8 @@ var PlayerSprite
 
 var _last_direction = Vector2.RIGHT
 
+var updateTilesCounterMax = 10
+var updateTilesCounter = 0
 @export var GroundTileMap: TileMap
 
 func _ready():
@@ -66,7 +68,11 @@ func _physics_process(delta):
 			var bullet_instance = Bullets[i].instantiate()
 			TimesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
 	
-	GroundTileMap.around_player(self.position)
+	if updateTilesCounter <= 0:
+		GroundTileMap.set_player_position(self.position)
+		updateTilesCounter = updateTilesCounterMax
+	else:
+		updateTilesCounter -= 1
 
 func _recieve_damage(collision):
 	if CurrentInvincibilityTime > 0:
