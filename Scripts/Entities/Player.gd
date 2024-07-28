@@ -42,9 +42,17 @@ var damage = 0
 
 @export var KnockbackStrength = 20.0
 
+var PlayerSprite
+
 var _last_direction = Vector2.RIGHT
 
+var updateTilesCounterMax = 10
+var updateTilesCounter = 0
+@export var GroundTileMap: TileMap
+
 func _ready():
+	PlayerSprite = $PlayerSprite
+	PlayerSprite.play("walk_right")
 	combination_dict = {
 		"AirShove": {
 			"AirShove": TornadoScene,
@@ -111,9 +119,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= Speed
 		_last_direction = Vector2.LEFT
+		PlayerSprite.flip_h = true
 	if Input.is_action_pressed("move_right"):
 		velocity.x += Speed
 		_last_direction = Vector2.RIGHT
+		PlayerSprite.flip_h = false
 
 	move_and_slide()
 
@@ -133,6 +143,12 @@ func _physics_process(delta):
 			_shoot_bullet(Bullets[i], i)
 			var bullet_instance = Bullets[i].instantiate()
 			TimesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
+	
+	if updateTilesCounter <= 0:
+		GroundTileMap.set_player_position(self.position)
+		updateTilesCounter = updateTilesCounterMax
+	else:
+		updateTilesCounter -= 1
 
 func _recieve_damage(collision):
 	if CurrentInvincibilityTime > 0:

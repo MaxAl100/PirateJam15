@@ -1,0 +1,57 @@
+[gd_scene load_steps=11 format=3 uid="uid://dhcve75ygmfus"]
+
+[ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
+[ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
+[ext_resource type="Script" path="res://Scripts/Managers/EnemyManager.gd" id="2_ewsba"]
+[ext_resource type="PackedScene" uid="uid://bctac63hk4goe" path="res://Entities/Characters/Enemy.tscn" id="2_ocplb"]
+[ext_resource type="PackedScene" uid="uid://bvaqgu1sot0x4" path="res://Entities/Attacks/Base Elements/FireCircle.tscn" id="3_7vh52"]
+[ext_resource type="PackedScene" uid="uid://cu7uf04pocvmc" path="res://Entities/Attacks/Base Elements/EarthShatter.tscn" id="4_08d6u"]
+[ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
+[ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
+[ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
+[ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="Player" parent="." node_paths=PackedStringArray("Light", "GroundTileMap") instance=ExtResource("1_2w1nt")]
+top_level = true
+Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt")])
+Light = NodePath("PointLight2D")
+GroundTileMap = NodePath("../TileMap")
+
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+blend_mode = 2
+range_item_cull_mask = 7
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("6_atsj0")
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("2_ewsba")
+EnemyScene = ExtResource("2_ocplb")
+
+[node name="NormalEnemyTimer" type="Timer" parent="EnemyManager"]
+
+[node name="Enemy" parent="EnemyManager" instance=ExtResource("2_ocplb")]
+position = Vector2(463, 111)
+
+[node name="Enemy2" parent="EnemyManager" instance=ExtResource("2_ocplb")]
+position = Vector2(97, 101)
+
+[node name="Enemy3" parent="EnemyManager" instance=ExtResource("2_ocplb")]
+position = Vector2(115, -1)
+
+[node name="Enemy4" parent="EnemyManager" instance=ExtResource("2_ocplb")]
+position = Vector2(284, 127)
+
+[node name="Enemy5" parent="EnemyManager" instance=ExtResource("2_ocplb")]
+position = Vector2(115, 182)
+
+[node name="TileMap" parent="." instance=ExtResource("9_7lv6q")]
+z_index = -1
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("10_47ps4")
+BigCells = Array[Vector2i]([Vector2i(4, 16), Vector2i(10, 16), Vector2i(16, 16), Vector2i(4, 22), Vector2i(4, 28), Vector2i(12, 24)])

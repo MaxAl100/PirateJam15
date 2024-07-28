@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
 [ext_resource type="PackedScene" uid="uid://0jv3ulohb1f8" path="res://Entities/Attacks/CombinedAttacks/TornadoPush.tscn" id="6_ap5v1"]
 [ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
+[ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
+[ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
+
 [ext_resource type="PackedScene" uid="uid://dexbntrl5ek7u" path="res://Entities/Attacks/CombinedAttacks/DustDevil.tscn" id="7_ms1b2"]
 [ext_resource type="PackedScene" uid="uid://cpl1echkfrtjl" path="res://Entities/Attacks/CombinedAttacks/SteamScreen.tscn" id="8_320i4"]
 [ext_resource type="PackedScene" uid="uid://cou8ksnavvdvv" path="res://Entities/Attacks/CombinedAttacks/Icicle.tscn" id="9_1lg1d"]
@@ -23,7 +26,7 @@
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
-[node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
+[node name="Player" parent="." node_paths=PackedStringArray("Light", "GroundTileMap") instance=ExtResource("1_2w1nt")]
 top_level = true
 Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu")])
 CombinableBullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu")])
@@ -42,6 +45,7 @@ SunScene = ExtResource("13_k8q0o")
 AlcoholScene = ExtResource("14_2a7d2")
 MoonScene = ExtResource("15_qenvx")
 Light = NodePath("PointLight2D")
+GroundTileMap = NodePath("../TileMap")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
@@ -79,3 +83,10 @@ position = Vector2(284, 127)
 
 [node name="Enemy5" parent="EnemyManager" instance=ExtResource("2_ocplb")]
 position = Vector2(115, 182)
+
+[node name="TileMap" parent="." instance=ExtResource("9_7lv6q")]
+z_index = -1
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("10_47ps4")
+BigCells = Array[Vector2i]([Vector2i(4, 16), Vector2i(10, 16), Vector2i(16, 16), Vector2i(4, 22), Vector2i(4, 28), Vector2i(12, 24)])
