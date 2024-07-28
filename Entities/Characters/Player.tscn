@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1ip6wdalw3he"]
+[gd_scene load_steps=11 format=3 uid="uid://d1ip6wdalw3he"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.gd" id="1_1r674"]
-[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_br3lb"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_tpo63"]
+[ext_resource type="Texture2D" uid="uid://bepejn5tmc82w" path="res://Sprites/Chars.png" id="3_ssldj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5j5kc"]
 
@@ -20,6 +20,43 @@ func _process(delta):
 	pass
 "
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqojt"]
+atlas = ExtResource("3_ssldj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk1qk"]
+atlas = ExtResource("3_ssldj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3kfm"]
+atlas = ExtResource("3_ssldj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcu0s"]
+atlas = ExtResource("3_ssldj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1xq1"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqojt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk1qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3kfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcu0s")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 8.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1r674")
 Bullets = Array[PackedScene]([ExtResource("2_tpo63")])
@@ -28,8 +65,9 @@ Bullets = Array[PackedScene]([ExtResource("2_tpo63")])
 shape = SubResource("CircleShape2D_5j5kc")
 script = SubResource("GDScript_sme75")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_br3lb")
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_l1xq1")
+animation = &"walk_right"
 
 [node name="Bullet Origin" type="Marker2D" parent="."]
