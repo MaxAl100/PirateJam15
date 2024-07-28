@@ -9,7 +9,7 @@ var target = "looking side"
 var direction = Vector2.ZERO
 var knockback = -120
 
-var burn_value = 10
+var burn_value = 30
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))

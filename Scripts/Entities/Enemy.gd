@@ -13,6 +13,10 @@ var Invincibilities: Array[Area2D] = []
 var currInvincibility: Array[float] = []
 var TotalInvincibility = 0
 
+var SmallSpriteStart = Vector2i(16,16)
+var BigSpriteStart = Vector2i(16,32)
+var SpriteSheet
+
 var Player
 var Direction
 var Drops = "nothing"
@@ -20,6 +24,7 @@ var Drops = "nothing"
 func _ready():
 	Player = get_parent().get_parent().get_node("Player")
 	self.add_to_group("enemies")
+	SpriteSheet = $Sprite2D
 
 
 func _physics_process(delta):
@@ -38,6 +43,10 @@ func _physics_process(delta):
 
 	if Health > 0:
 		Direction = (Player.position - self.position).normalized()
+		if Direction.x < 0:
+			SpriteSheet.flip_h = true
+		else:
+			SpriteSheet.flip_h = false
 		velocity = Direction * Speed * SlowDownEffect
 		move_and_slide()
 
