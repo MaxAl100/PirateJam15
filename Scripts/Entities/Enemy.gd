@@ -15,6 +15,7 @@ var TotalInvincibility = 0
 
 var Player
 var Direction
+var Drops = "nothing"
 
 func _ready():
 	Player = get_parent().get_parent().get_node("Player")
@@ -49,6 +50,8 @@ func _recieve_damage(entity):
 	currInvincibility.append(InvincibilityTime)
 	Health -= rec_damage * DamageMultiplier
 	if Health <= 0:
+		if Drops != "nothing":
+			pass
 		self.queue_free()
 	else:
 		apply_knockback(entity)

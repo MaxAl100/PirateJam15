@@ -54,9 +54,16 @@ texture = ExtResource("6_atsj0")
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("2_ewsba")
+TimeBetweenWaves = 60
 EnemyScene = ExtResource("2_ocplb")
 
 [node name="NormalEnemyTimer" type="Timer" parent="EnemyManager"]
+
+[node name="BigEnemyTimer" type="Timer" parent="EnemyManager"]
+
+[node name="CircleWaveTimer" type="Timer" parent="EnemyManager"]
+
+[node name="WaveSpawnTimer" type="Timer" parent="EnemyManager"]
 
 [node name="Enemy" parent="EnemyManager" instance=ExtResource("2_ocplb")]
 position = Vector2(463, 111)
