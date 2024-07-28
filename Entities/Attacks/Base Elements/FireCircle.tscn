@@ -7,7 +7,7 @@
 radius = 30.0
 
 [node name="FireCircle" type="Area2D"]
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.156863)
 script = ExtResource("1_m6bnl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=19 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
@@ -7,15 +7,43 @@
 [ext_resource type="PackedScene" uid="uid://bvaqgu1sot0x4" path="res://Entities/Attacks/Base Elements/FireCircle.tscn" id="3_7vh52"]
 [ext_resource type="PackedScene" uid="uid://cu7uf04pocvmc" path="res://Entities/Attacks/Base Elements/EarthShatter.tscn" id="4_08d6u"]
 [ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
+[ext_resource type="PackedScene" uid="uid://0jv3ulohb1f8" path="res://Entities/Attacks/CombinedAttacks/TornadoPush.tscn" id="6_ap5v1"]
 [ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
 [ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
 [ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
 
+[ext_resource type="PackedScene" uid="uid://dexbntrl5ek7u" path="res://Entities/Attacks/CombinedAttacks/DustDevil.tscn" id="7_ms1b2"]
+[ext_resource type="PackedScene" uid="uid://cpl1echkfrtjl" path="res://Entities/Attacks/CombinedAttacks/SteamScreen.tscn" id="8_320i4"]
+[ext_resource type="PackedScene" uid="uid://cou8ksnavvdvv" path="res://Entities/Attacks/CombinedAttacks/Icicle.tscn" id="9_1lg1d"]
+[ext_resource type="PackedScene" uid="uid://ddck0wve0m23b" path="res://Entities/Attacks/CombinedAttacks/IronSword.tscn" id="10_guqoq"]
+[ext_resource type="PackedScene" uid="uid://kendl01lri3t" path="res://Entities/Attacks/CombinedAttacks/LavaBall.tscn" id="11_kgfdi"]
+[ext_resource type="PackedScene" uid="uid://d25eqfwr5fh1i" path="res://Entities/Attacks/CombinedAttacks/MudBlob.tscn" id="12_6jqr0"]
+[ext_resource type="PackedScene" uid="uid://on22jtyiva5g" path="res://Entities/Attacks/CombinedAttacks/SunPower.tscn" id="13_k8q0o"]
+[ext_resource type="PackedScene" uid="uid://c0126j8olj3qv" path="res://Entities/Attacks/CombinedAttacks/Alcohol Toss.tscn" id="14_2a7d2"]
+[ext_resource type="PackedScene" uid="uid://v2slfn5ima3y" path="res://Entities/Attacks/CombinedAttacks/MoonPower.tscn" id="15_qenvx"]
+
 [node name="BaseLevel" type="Node2D"]
+
+[node name="BulletContainer" type="Node2D" parent="."]
 
 [node name="Player" parent="." node_paths=PackedStringArray("Light", "GroundTileMap") instance=ExtResource("1_2w1nt")]
 top_level = true
-Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt")])
+Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu")])
+CombinableBullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu")])
+AirScene = ExtResource("5_0vqtt")
+EarthScene = ExtResource("4_08d6u")
+FireScene = ExtResource("3_7vh52")
+WaterScene = ExtResource("2_d6ayu")
+TornadoScene = ExtResource("6_ap5v1")
+DustScene = ExtResource("7_ms1b2")
+SteamScene = ExtResource("8_320i4")
+IceScene = ExtResource("9_1lg1d")
+IronScene = ExtResource("10_guqoq")
+LavaScene = ExtResource("11_kgfdi")
+MudScene = ExtResource("12_6jqr0")
+SunScene = ExtResource("13_k8q0o")
+AlcoholScene = ExtResource("14_2a7d2")
+MoonScene = ExtResource("15_qenvx")
 Light = NodePath("PointLight2D")
 GroundTileMap = NodePath("../TileMap")
 

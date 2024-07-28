@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cpl1echkfrtjl"]
+
+[ext_resource type="Script" path="res://Scripts/Attacks/Combined Elements/SteamScreen.gd" id="1_4tkox"]
+[ext_resource type="Texture2D" uid="uid://buvi6hgyh5857" path="res://Sprites/icon.svg" id="2_iok4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1h07"]
+size = Vector2(50, 50)
+
+[sub_resource type="Animation" id="Animation_ftkwb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_bhtgo"]
+resource_name = "Steam Screen Animation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(2.5, 2.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfy4v"]
+_data = {
+"RESET": SubResource("Animation_ftkwb"),
+"Steam Screen Animation": SubResource("Animation_bhtgo")
+}
+
+[node name="SteamScreen" type="Area2D"]
+modulate = Color(1, 1, 1, 0.501961)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_4tkox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -3.14159
+scale = Vector2(0.389038, 0.4)
+texture = ExtResource("2_iok4j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.999953, -3.29493e-05)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_w1h07")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yfy4v")
+}
+autoplay = "Steam Screen Animation"

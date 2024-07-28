@@ -2,12 +2,17 @@ extends CharacterBody2D
 
 @export var damage = 10
 @export var Speed = 15.0
-@export var Health = 3.0
+var SlowDownEffect = 1
+var DamageMultiplier = 1
+@export var Health = 30.0
 
 @export var InvincibilityTime = 0.5
+@export var TotalInvincibilityTime = 0.1
 @export var KnockbackResistance = 0.4
+var Invincibilities: Array[Area2D] = []
+var currInvincibility: Array[float] = []
+var TotalInvincibility = 0
 
-var currInvincibility = 0
 var Player
 var Direction
 
@@ -17,27 +22,46 @@ func _ready():
 
 
 func _physics_process(delta):
-	currInvincibility -= delta
+	if TotalInvincibility > 0:
+		TotalInvincibility -= delta
+	for pos in range(currInvincibility.size() - 1, -1, -1):
+		currInvincibility[pos] -= delta
+		if currInvincibility[pos] <= 0:
+			currInvincibility.remove_at(pos)
+			Invincibilities.remove_at(pos)
+
+	if SlowDownEffect > 1:
+		SlowDownEffect = 1
+	elif SlowDownEffect < 1:
+		SlowDownEffect += 0.5 * delta
+
 	if Health > 0:
 		Direction = (Player.position - self.position).normalized()
-		velocity = Direction * Speed
+		velocity = Direction * Speed * SlowDownEffect
 		move_and_slide()
 
 func _recieve_damage(entity):
-	var damage = entity.damage
-	if currInvincibility > 0:
+	if entity in Invincibilities or TotalInvincibility > 0:
 		return
-	currInvincibility = InvincibilityTime
-	Health -= damage
+	TotalInvincibility = TotalInvincibilityTime
+	var rec_damage = entity.damage
+	Invincibilities.append(entity)
+	currInvincibility.append(InvincibilityTime)
+	Health -= rec_damage * DamageMultiplier
 	if Health <= 0:
 		self.queue_free()
 	else:
-		_apply_knockback(entity)
+		apply_knockback(entity)
 		
 func get_damage():
 	return damage
 
 
-func _apply_knockback(entity):
+func apply_knockback(entity):
 	var knockback_direction = (position - entity.position).normalized()
 	position -= knockback_direction * entity.knockback * KnockbackResistance
+
+func apply_pull_force(source_position, strength, delta):
+	var pull_direction = (source_position - position).normalized()
+	position += pull_direction * strength * delta
+
