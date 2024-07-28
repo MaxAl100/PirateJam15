@@ -18,6 +18,8 @@ var PlayerSprite
 
 var _last_direction = Vector2.RIGHT
 
+@export var GroundTileMap: TileMap
+
 func _ready():
 	TimesForBullets.resize(Bullets.size())
 	for i in range(Bullets.size()):
@@ -63,6 +65,8 @@ func _physics_process(delta):
 			_shoot_bullet(Bullets[i])
 			var bullet_instance = Bullets[i].instantiate()
 			TimesForBullets[i] = bullet_instance.maxTimeBetweenAttacks
+	
+	GroundTileMap.around_player(self.position)
 
 func _recieve_damage(collision):
 	if CurrentInvincibilityTime > 0:

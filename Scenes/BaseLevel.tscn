@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=11 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
@@ -8,13 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://cu7uf04pocvmc" path="res://Entities/Attacks/Base Elements/EarthShatter.tscn" id="4_08d6u"]
 [ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
 [ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
+[ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
+[ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
 
 [node name="BaseLevel" type="Node2D"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("Light") instance=ExtResource("1_2w1nt")]
+[node name="Player" parent="." node_paths=PackedStringArray("Light", "GroundTileMap") instance=ExtResource("1_2w1nt")]
 top_level = true
 Bullets = Array[PackedScene]([ExtResource("2_d6ayu"), ExtResource("3_7vh52"), ExtResource("4_08d6u"), ExtResource("5_0vqtt")])
 Light = NodePath("PointLight2D")
+GroundTileMap = NodePath("../TileMap")
 
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
@@ -45,3 +48,6 @@ position = Vector2(284, 127)
 
 [node name="Enemy5" parent="EnemyManager" instance=ExtResource("2_ocplb")]
 position = Vector2(115, 182)
+
+[node name="TileMap" parent="." instance=ExtResource("9_7lv6q")]
+script = ExtResource("10_47ps4")
