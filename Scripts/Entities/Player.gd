@@ -33,7 +33,7 @@ var SpellText
 var currentTimeToBurn = 3
 
 @export var Health = 300.0
-@export var DecreaseStrength = 1.0
+@export var DecreaseStrength = 2.0
 @export var Light: PointLight2D
 
 @export var MaxInvincibilityTime = 0.8

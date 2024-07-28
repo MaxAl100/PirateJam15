@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhcve75ygmfus"]
+[gd_scene load_steps=21 format=3 uid="uid://dhcve75ygmfus"]
 
 [ext_resource type="PackedScene" uid="uid://d1ip6wdalw3he" path="res://Entities/Characters/Player.tscn" id="1_2w1nt"]
 [ext_resource type="PackedScene" uid="uid://dy4bo2mtkjcnb" path="res://Entities/Attacks/Base Elements/WaterPellet.tscn" id="2_d6ayu"]
@@ -9,12 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cdusi82ut1bqd" path="res://Entities/Attacks/Base Elements/AirShove.tscn" id="5_0vqtt"]
 [ext_resource type="PackedScene" uid="uid://0jv3ulohb1f8" path="res://Entities/Attacks/CombinedAttacks/TornadoPush.tscn" id="6_ap5v1"]
 [ext_resource type="Texture2D" uid="uid://bytj0bqicgjmm" path="res://Sprites/Masks/VisionMask.png" id="6_atsj0"]
-[ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
-[ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
-
 [ext_resource type="PackedScene" uid="uid://dexbntrl5ek7u" path="res://Entities/Attacks/CombinedAttacks/DustDevil.tscn" id="7_ms1b2"]
 [ext_resource type="PackedScene" uid="uid://cpl1echkfrtjl" path="res://Entities/Attacks/CombinedAttacks/SteamScreen.tscn" id="8_320i4"]
 [ext_resource type="PackedScene" uid="uid://cou8ksnavvdvv" path="res://Entities/Attacks/CombinedAttacks/Icicle.tscn" id="9_1lg1d"]
+[ext_resource type="PackedScene" uid="uid://depqaoawsenrn" path="res://Tilemaps/TileMapScene.tscn" id="9_7lv6q"]
+[ext_resource type="Script" path="res://Tilemaps/TileMapScene.gd" id="10_47ps4"]
 [ext_resource type="PackedScene" uid="uid://ddck0wve0m23b" path="res://Entities/Attacks/CombinedAttacks/IronSword.tscn" id="10_guqoq"]
 [ext_resource type="PackedScene" uid="uid://kendl01lri3t" path="res://Entities/Attacks/CombinedAttacks/LavaBall.tscn" id="11_kgfdi"]
 [ext_resource type="PackedScene" uid="uid://d25eqfwr5fh1i" path="res://Entities/Attacks/CombinedAttacks/MudBlob.tscn" id="12_6jqr0"]
@@ -55,10 +54,10 @@ range_item_cull_mask = 7
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("6_atsj0")
+offset = Vector2(-6, 0)
 
 [node name="EnemyManager" type="Node2D" parent="."]
 script = ExtResource("2_ewsba")
-TimeBetweenWaves = 60
 EnemyScene = ExtResource("2_ocplb")
 
 [node name="NormalEnemyTimer" type="Timer" parent="EnemyManager"]

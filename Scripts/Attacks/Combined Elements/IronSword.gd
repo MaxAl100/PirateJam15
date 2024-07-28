@@ -8,7 +8,7 @@ var attackLength = 0.5
 var target = "self"
 var knockback = -160
 
-var burn_value = 10
+var burn_value = 30
 
 func _ready():
 	connect("body_entered", Callable(self, "_on_Bullet_body_entered"))
