@@ -7,18 +7,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_u78ao"]
 
 [node name="Enemy" type="CharacterBody2D"]
-scale = Vector2(5, 5)
 script = ExtResource("1_tbk0u")
 DroppedElementScene = ExtResource("2_5fd78")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.12, 0.12)
 shape = SubResource("CircleShape2D_u78ao")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
-scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_0uty3")
 region_enabled = true
 region_rect = Rect2(16, 16, 16, 16)
