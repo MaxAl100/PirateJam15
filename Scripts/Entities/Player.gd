@@ -99,7 +99,6 @@ func _process(delta):
 		currentTimeToBurn = TotalTimeToBurn
 	
 	if Input.is_action_just_pressed("select"):
-		print("Selected the following element: ", CurrentSpell)
 		if selectedForCombination != null:
 			combine_spells(selectedForCombination, CurrentSpell)
 			selectedForCombination = null
@@ -136,6 +135,9 @@ func _physics_process(delta):
 		var collision_name = collision.get_collider().name
 		if "Enemy" in collision_name:
 			_recieve_damage(collision)
+		if "Pick" in collision_name:
+			print("Colliding with new element",collision.get_collider().SelectedElement)
+			get_element(collision)
 
 	for i in range(TimesForBullets.size()):
 		TimesForBullets[i] -= delta
@@ -205,7 +207,6 @@ func _shoot_bullet(bullet_scene, pos):
 		newBullet.position = position
 
 func remove_bullet(pos):
-	print("Removing at location ", pos)
 	if Bullets.size() <= 1:
 		return
 	
@@ -226,6 +227,7 @@ func remove_bullet(pos):
 		SpellText.text = "No Spells Available"
 
 func add_bullet(bullet):
+	print(bullet.resource_name)
 	Bullets.append(bullet)
 	resize_lists()
 
@@ -269,6 +271,8 @@ func combine_spells(pos1, pos2):
 	var new_spell = combination_dict[spell_instance1.name][spell_instance2.name]
 	
 	if new_spell:
+		Health-= Bullets[pos1].instantiate().burn_value
+		Health-= Bullets[pos2].instantiate().burn_value
 		if pos1 > pos2:
 			remove_bullet(pos1)
 			remove_bullet(pos2)
@@ -276,4 +280,9 @@ func combine_spells(pos1, pos2):
 			remove_bullet(pos2)
 			remove_bullet(pos1)
 		add_bullet(new_spell)
-	
+
+func get_element(coll):
+	var collider = coll.get_collider()
+	self.add_bullet(collider.SelectedElement)
+	collider.queue_free()
+

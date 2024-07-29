@@ -2,19 +2,24 @@ extends Node2D
 
 @export var TimeBetweenSpawns = 4
 @export var DistanceFromPlayer = 300
-@export var TimeBetweenWaves = 49
+@export var TimeBetweenWaves = 79
 @export var WaveSize = 20
 @export var TimeBetweenCircles = 91
 @export var CircleEnemyCount = 100.0
 @export var CircleDistance = 500
 @export var BigEnemyTime = 73
+@export var TimeToIncreaseDifficulty = 180
 @export var EnemyScene: PackedScene
+@export var BigEnemyChance = 0.01
 
 var EnemySpawnTimer
 var WaveSpawnTimer
 var CircleSpawnTimer
 var BigEnemyTimer
+var IncreaseDiffTimer
 var Player
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	Player = get_parent().get_node("Player")
@@ -41,14 +46,23 @@ func set_timers():
 	BigEnemyTimer.timeout.connect(spawn_big_enemy)
 	BigEnemyTimer.start(BigEnemyTime)
 	
+	IncreaseDiffTimer = $IncreaseDifficultyTimer
+	IncreaseDiffTimer.timeout.connect(increase_difficulty)
+	IncreaseDiffTimer.start(TimeToIncreaseDifficulty)
+	
 
 func _on_spawn_timeout():
-	var enemy = EnemyScene.instantiate()
-	var direction = Vector2(randf_range(-10, 10), randf_range(10, -10)).normalized()
-	var enemy_location = Player.position + DistanceFromPlayer * direction
-	enemy.position = enemy_location
-	enemy.add_to_group("enemies")
-	get_parent().get_node("EnemyManager").add_child(enemy) 
+	if rng.randf() < BigEnemyChance:
+		spawn_big_enemy()
+	else:
+		var enemy = EnemyScene.instantiate()
+		var direction = Vector2(randf_range(-10, 10), randf_range(10, -10)).normalized()
+		var enemy_location = Player.position + DistanceFromPlayer * direction
+		enemy.position = enemy_location
+		if rng.randf() < 20*BigEnemyChance:
+			enemy.Drops = "element"
+		enemy.add_to_group("enemies")
+		get_parent().get_node("EnemyManager").add_child(enemy) 
 
 func spawn_wave():
 	var direction = Vector2(randf_range(-10, 10), randf_range(10, -10)).normalized()
@@ -81,6 +95,15 @@ func spawn_big_enemy():
 	enemy.position = enemy_location
 	enemy.Health = 10*enemy.Health
 	enemy.Speed = 0.4*enemy.Speed
+	enemy.Drops = "element"
+	enemy.Size = "Big"
 	enemy.add_to_group("enemies")
 	get_parent().get_node("EnemyManager").add_child(enemy) 
+
+func increase_difficulty():
+	TimeBetweenCircles = TimeBetweenCircles*2/3
+	TimeBetweenSpawns = TimeBetweenSpawns*2/3
+	TimeBetweenWaves = TimeBetweenWaves*2/3
+	BigEnemyTime = BigEnemyTime*2/3
+	set_timers()
 

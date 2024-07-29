@@ -27,7 +27,7 @@
 
 [node name="Player" parent="." node_paths=PackedStringArray("Light", "GroundTileMap") instance=ExtResource("1_2w1nt")]
 top_level = true
-Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu")])
+Bullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("3_7vh52"), ExtResource("2_d6ayu"), ExtResource("2_d6ayu")])
 CombinableBullets = Array[PackedScene]([ExtResource("5_0vqtt"), ExtResource("4_08d6u"), ExtResource("3_7vh52"), ExtResource("2_d6ayu")])
 AirScene = ExtResource("5_0vqtt")
 EarthScene = ExtResource("4_08d6u")
@@ -67,6 +67,8 @@ EnemyScene = ExtResource("2_ocplb")
 [node name="CircleWaveTimer" type="Timer" parent="EnemyManager"]
 
 [node name="WaveSpawnTimer" type="Timer" parent="EnemyManager"]
+
+[node name="IncreaseDifficultyTimer" type="Timer" parent="EnemyManager"]
 
 [node name="Enemy" parent="EnemyManager" instance=ExtResource("2_ocplb")]
 position = Vector2(463, 111)

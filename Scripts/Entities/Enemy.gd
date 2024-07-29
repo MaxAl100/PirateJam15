@@ -15,16 +15,25 @@ var TotalInvincibility = 0
 
 var SmallSpriteStart = Vector2i(16,16)
 var BigSpriteStart = Vector2i(16,32)
+var Selector = RandomNumberGenerator.new()
 var SpriteSheet
 
 var Player
 var Direction
 var Drops = "nothing"
+var Size = "Small"
+var SmallSpritesStart = Vector2i(16,16)
+var BigSpritesStart = Vector2i(16, 32)
+@export var DroppedElementScene: PackedScene
 
 func _ready():
 	Player = get_parent().get_parent().get_node("Player")
 	self.add_to_group("enemies")
 	SpriteSheet = $Sprite2D
+	if Size == "Small":
+		choose_small_sprite()
+	else:
+		choose_big_sprite()
 
 
 func _physics_process(delta):
@@ -59,8 +68,11 @@ func _recieve_damage(entity):
 	currInvincibility.append(InvincibilityTime)
 	Health -= rec_damage * DamageMultiplier
 	if Health <= 0:
-		if Drops != "nothing":
-			pass
+		if Drops == "element":
+			print("DROPPING ELEMENT")
+			var element = DroppedElementScene.instantiate()
+			element.position = self.position
+			get_tree().root.add_child(element) 
 		self.queue_free()
 	else:
 		apply_knockback(entity)
@@ -76,4 +88,12 @@ func apply_knockback(entity):
 func apply_pull_force(source_position, strength, delta):
 	var pull_direction = (source_position - position).normalized()
 	position += pull_direction * strength * delta
+
+func choose_small_sprite():
+	var spriteLocation = Selector.randi_range(0,11)
+	SpriteSheet.region_rect = Rect2(Vector2((spriteLocation * 16) + 1, 16), Vector2(16, 16))
+
+func choose_big_sprite():
+	var spriteLocation = Selector.randi_range(0,2)
+	SpriteSheet.region_rect = Rect2(Vector2(16 + spriteLocation * 32, 32), Vector2(32, 32))
 
